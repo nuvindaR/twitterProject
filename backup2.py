@@ -28,9 +28,9 @@ async def main():
 
     for user in user_tweets:
         user_dict = user.dict()
-        result = collection.insert_one(user_dict)
-        inserted_id = result.inserted_id
-        print(f"Inserted document with ID: {inserted_id}")
+        #result = collection.insert_one(user_dict)
+        #inserted_id = result.inserted_id
+        print(f"Inserted document with ID: {user_dict}")
 
 
 
