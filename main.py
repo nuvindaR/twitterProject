@@ -4,7 +4,7 @@ import os
 
 from twscrape import API, gather
 from twscrape.logger import set_log_level
-from connection import db_connection
+from mongodb_connection import db_connection
 
 import pandas as pd
 
@@ -18,13 +18,15 @@ async def main():
     EMAIL_PASSWORD = os.getenv("EMAIL_PASSWORD")
 
     await api.pool.add_account(TWITTER_USERNAME, TWITTER_PASSWORD, EMAIL, EMAIL_PASSWORD)
+    await api.pool.add_account("@RaviNuv88976", "Nuvi@8838!", "iqztr001@gmail.com", "Nuvi@8838!")
+    await api.pool.add_account("@Tharusha_Iqz", "Thar@5962!", "tharushaanjula666@outlook.com", "Thar@5962!")
 
     await api.pool.login_all()
 
-    client = db_connection()
-
-    db = client.twitter_data
-    tweets_collection = db.tweets
+    # client = db_connection()
+    #
+    # db = client.twitter_data
+    # tweets_collection = db.tweets
 
 
     #user_id = 44196397
@@ -36,9 +38,9 @@ async def main():
     for i in range(len(df2)):
         category = df2.loc[i, "Category"]
         new_tweets = list()
-        with open(category + ".json", "a") as f:
+        with open(category + "_v2.json", "a") as f:
             for user_id in df2.loc[i, "user_id_list"]:
-                for tweet in await gather(api.user_tweets(user_id, limit=100000)):
+                for tweet in await gather(api.user_tweets(user_id, limit=5000)):
                     new_tweets.append(json.loads(tweet.json()))
 
             print(len(new_tweets))
@@ -48,7 +50,7 @@ async def main():
             # result = tweets_collection.insert_many(new_tweets)
             # document_ids = result.inserted_ids
             # print(f"ids of the inserted documents: {document_ids}")
-    client.close()
+    # client.close()
 
     # NOTE 1: gather is a helper function to receive all data as list, FOR can be used as well:
     # async for tweet in api.user_by_id(1701675223295352832):
