@@ -6,10 +6,9 @@ from twscrape.logger import set_log_level
 from contextlib import aclosing
 
 async def main():
-    api = API()  # or API("path-to.db") - default is `accounts.db`
-
+    api = API()  # or API("path-to.db") - default is `accounts.db`vim
     # ADD ACCOUNTS (for CLI usage see BELOW)
-    await api.pool.add_account("@Tharush28383713", "Tharushaiqz12", "tharushaiqz@gmail.com", "Tharushaiqz12")
+    await api.pool.add_account("@Tharusha_Iqz", "Thar@5962!", "tharushaanjula666@outlook.com", "Thar@5962!")
 
     await api.pool.login_all()
 
@@ -45,6 +44,7 @@ async def main():
     # followers = await gather(api.followers(user_id, limit=20))
     following = await gather(api.following(user_id, limit=20))
     #user_tweets = await gather(api.user_tweets(user_id, limit=20))
+    print(following)
 
     # user_tweets_replies = await gather(api.user_tweets_and_replies(user_id, limit=20))
     #
